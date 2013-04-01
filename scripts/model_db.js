@@ -1,7 +1,7 @@
 var store = Ext.create('Ext.data.TreeStore',{
 	proxy: {
 	    type: 'ajax',
-	    url: '/dysuke/es/tree_model_info.txt'
+	    url: '/webbs/models/tree_model_info.txt'
 	},
 	root: {
 	    text: 'E-Cell Model',
