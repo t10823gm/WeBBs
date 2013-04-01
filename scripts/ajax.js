@@ -149,7 +149,7 @@ function result_graph_success(response) {
 			    aECD = resultJSON[0].Data[i].split("_");
 			    f_ext = aECD.pop(); f_var = aECD.pop();			    			    
 			    ecd_name = f_var + "_" +f_ext;
-			    window.open("/webbs/cgi/txt2htm.cgi?s_ID="+s_ID+"&ecd_name="+ecd_name+"&FPN="+FPN, "", "width=620, height=420, location=no");
+			    window.open("/webbs/cgi/popup.cgi?s_ID="+s_ID+"&ecd_name="+ecd_name+"&FPN="+FPN, "", "width=620, height=420, location=no");
 			}
 			return false;
 		    }		    
