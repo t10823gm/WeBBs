@@ -1,0 +1,16 @@
+file_name	model_name	annotation	pathway_map
+Simple.em	Simple	Very simple model for beginner E-Cell3.	simple.png
+Drosophila.em	Drosophila	In the model of circadian rhythms in Drosophila, modeling oscillations of the period protein(PER). A mathmatical model of this model were published in the following scientific paper. Goldbeter A.,A model for circadian oscillations in the Drosophila period protein(PER).Proc Biol Sci.1995.Sep 22;261(1362):319-24.	drosophila.png
+Heinrich.em	Heinrich	Model of glycolysis of human erythrocytes. Model with synthesis and consumption of ATP. Are based on following scienticic paper. Rapoport TA, Heinrich R.,Mathmatical analysis of multienzyme systems.I.Modelling of the glycolysis of human erythrocytes.Biosystems.1975 Jul;7(1):120-9. Heinrich R,Rapoport TA.,Mathmatical analysis of multienzyme systems.II. Steady state and transient control.Biosystems.1975 Jul;7(1):130-6.	heinrich.png
+heatshock.em	heatshock	It is simple model that response of heatshock in E.coli. This model couple stochastic model(Gillespie) with  deterministic model(ODE).	heatshock.png
+BAND3-Hb_new_py.em	BAND3-Hb_new_py	Metabolic model of human Red Blood Cells.This model is constructed only python files.	rbc.png
+neuron.em	neuron	neuron	neuron.png
+Pandit.em	Pandit	Pandit	Pandit.png
+population.em	population	population	population.png
+ERK.em	ERK	ERK	ERK.png
+tenTusscher.em	tenTusscher	tenTusscher	tenTusscher.png
+Ex7.em	Ex7	Ex7	Ex7.png
+fix2.em	fix2	fix2	fix2.png
+try1.em	try1	try1	try1.png
+Glycolysis_Teusink2000.em	Glycolysis_Teusink2000	Glycolysis_Teusink2000	Glycolysis_Teusink2000.png
+gata1.em	gata1	gata1	gata1.png

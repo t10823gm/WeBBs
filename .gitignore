@@ -1,6 +1,3 @@
 *~
 *.png
-/img/*
 /result/*
-/Chart/*
-/models/*
