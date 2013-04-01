@@ -51,12 +51,8 @@ ecell_model.getSelectionModel().on('selectionchange', function(sm, selectedRecor
 	count = count +1;
 	model_name = selectedRecord[0].data.text;
     });
+
 //モデルのアノテーションの取得
-/*
-ecell_model.getSelectionModel().on('selectionchange', function(sm, selectedRecord) {
-	ViewPort.getRefItems()[2].getRefItems()[2].getRefItems()[0].body.dom.innerText = selectedRecord[0].data.annotation;
-    });
-*/
 ecell_model.getSelectionModel().on('selectionchange', function(sm, selectedRecord) {
         params = { file_name: selectedRecord[0].data.text + ".em" };
         //send Ajax Request                                                                          

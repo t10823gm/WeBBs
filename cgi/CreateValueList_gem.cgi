@@ -20,16 +20,16 @@ if 'ID' in query:
 
 name = str( int(time.time() % 1296000) * 10 + int(random.random()) + 1048576 )
 
-os.mkdir("./results/guest/" + name)
-os.system("chmod 777 ./results/guest/" + name)
-os.system("cp ../../ecell/models/" + ID + " ./results/guest/" + name + "/" + name + ".em")
-os.system("cp /var/www/ems/merge_ecd_msec.pl ./results/guest/"+ name + "/")
+os.mkdir("../results/guest/" + name)
+os.system("chmod 777 ../results/guest/" + name)
+os.system("cp ../models/" + ID + " ../results/guest/" + name + "/" + name + ".em")
+os.system("cp /var/www/ems/merge_ecd_msec.pl ../results/guest/"+ name + "/")
 
 # convert EM to EML (by em2eml)
-os.system("/usr/local/bin/ecell3-em2eml --outfile=./results/guest/" + name + "/" + name + ".eml ./results/guest/" + name + "/" + name + ".em")
+os.system("/usr/local/bin/ecell3-em2eml --outfile=../results/guest/" + name + "/" + name + ".eml ../results/guest/" + name + "/" + name + ".em")
 
 # load EML model and list-up all variable (PATH, Value, MolarConc)
-anEMLFileName = "./results/guest/" + name + "/" + name + ".eml"
+anEMLFileName = "../results/guest/" + name + "/" + name + ".eml"
 aSimulator = ecell.emc.Simulator()
 aSession = ecell.Session.Session(aSimulator)
 aSession.loadModel(anEMLFileName)
@@ -49,7 +49,7 @@ for anID in anEmlSupport.getVariableList():
     line = line + str(Path) +"/"+ str(ID) + "\t" + "0\t" +"0\t"+ str(Value) +"\t"+ str(MolarConc) + "\n"
 
 if os.path.exists("history.txt"):
-    ft = open("./results/guest/"+name+"/history.txt", "a")
+    ft = open("../results/guest/"+name+"/history.txt", "a")
     ft.close()
 else:
     # history file

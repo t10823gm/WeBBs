@@ -25,8 +25,8 @@ if form.has_key("userID"):
 else:
     userID = "guest"
 
-if os.path.exists("./results/"+ userID + "/" + sessionID):
-    anEMLFileName = "./results/" + userID + "/" + sessionID + "/" + sessionID + ".eml"
+if os.path.exists("../results/"+ userID + "/" + sessionID):
+    anEMLFileName = "../results/" + userID + "/" + sessionID + "/" + sessionID + ".eml"
     aSimulator = ecell.emc.Simulator()
     aSession = ecell.Session.Session(aSimulator)
     aSession.loadModel(anEMLFileName)
@@ -49,7 +49,7 @@ if os.path.exists("./results/"+ userID + "/" + sessionID):
             if ClassName == "ExpressionFluxProcess":
                 Expression  = aSession.theSimulator.getEntityProperty('Process:' + anID + ':Expression')
             else:
-                Expression = "hoge"
+                Expression = ClassName
 
             VariableReferenceList = ', '.join(['[' + ', '.join([str(ll) for ll in l]) + ']' for l in aSession.theSimulator.getEntityProperty('Process:' + anID + ':VariableReferenceList')])
 

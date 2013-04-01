@@ -44,7 +44,7 @@ print "<script type=\"text/javascript\" src=\"../../Highcharts/js/highcharts.src
 print "</head>"
 print "<body>"
 print "<div id=\"container\" style=\"width: 600px; height: 400px; margin: 0 auto\"></div>"
-print "<script type=\"text/javascript\" src=\"./scripts/make_graph.js\"></script>"
+print "<script type=\"text/javascript\" src=\"../scripts/make_graph.js\"></script>"
 print "<script type=\"text/javascript\">"
 print "make_graph(" + ID +","+"\""+ FPN +"\""+")"
 print "</script>"

@@ -27,7 +27,7 @@ line = [0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5]
 itemlist = [1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6]
 result = 0
 
-fh = open("model_info.txt","r")
+fh = open("../models/model_info.txt","r")
 
 for i in range(0,16):
     line[i] = fh.readline()

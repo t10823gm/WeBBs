@@ -1,5 +1,5 @@
 function make_graph(s_ID, ecd_name){
-    Data = "/dysuke/es/results/guest/" + s_ID + "/" + ecd_name
+    Data = "/webbs/results/guest/" + s_ID + "/" + ecd_name
     console.log(Data);
 var aSeries = [];
 $.when($.get(Data),0).done(function(data, num) {
