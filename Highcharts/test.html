@@ -1,0 +1,344 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "xhtml11.dtd">
+
+<html debug="true">
+<head>
+<title>Highcharts Demo Gallery</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!--  meta http-equiv="X-UA-Compatible" content="chrome=1" -->
+
+<link rel="shortcut icon" href="../favicon.ico"/>
+
+
+
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+
+<!-- script type="text/javascript" src="http://code.jquery.com/jquery-1.7.js"></script -->
+
+<script type="text/javascript">	
+jQuery.noConflict();
+</script>
+
+<script type="text/javascript" src="/js/highcharts.js"></script>
+<script type="text/javascript" src="/js/modules/exporting.js"></script>
+
+
+<!-- Highslide code -->
+<script type="text/javascript" src="/highslide/highslide-full.min.js"></script>
+<script type="text/javascript" src="/highslide/highslide.config.js" charset="utf-8"></script>
+<link rel="stylesheet" type="text/css" href="/highslide/highslide.css" />
+<!--[if lt IE 7]>
+<link rel="stylesheet" type="text/css" href="/highslide/highslide-ie6.css" />
+<![endif]-->
+<!-- End Highslide code -->
+
+<script type="text/javascript">
+var example = 'line-basic',
+	theme = 'default';
+</script>
+
+<script type="text/javascript" src="/demo/scripts.js"></script>
+
+<script type="text/javascript">
+	Highcharts.theme = { colors: ['#4572A7'] };// prevent errors in default theme
+	var highchartsOptions = Highcharts.getOptions(); 
+</script>
+
+<link rel="stylesheet" href="/templates/yoo_symphony/css/template.css" type="text/css" />
+<link rel="stylesheet" href="/templates/yoo_symphony/css/variations/brown.css" type="text/css" />
+<link href="/demo/demo.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript">
+
+		var chart;
+		jQuery(document).ready(function() {
+			chart = new Highcharts.Chart({
+				chart: {
+					renderTo: 'container',
+					defaultSeriesType: 'line',
+					marginRight: 130,
+					marginBottom: 25
+				},
+				title: {
+					text: 'Monthly Average Temperature',
+					x: -20 //center
+				},
+				subtitle: {
+					text: 'Source: WorldClimate.com',
+					x: -20
+				},
+				xAxis: {
+					categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 
+						'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+				},
+				yAxis: {
+					title: {
+						text: 'Temperature (°C)'
+					},
+					plotLines: [{
+						value: 0,
+						width: 1,
+						color: '#808080'
+					}]
+				},
+				tooltip: {
+					formatter: function() {
+			                return '<b>'+ this.series.name +'</b><br/>'+
+							this.x +': '+ this.y +'°C';
+					}
+				},
+				legend: {
+					layout: 'vertical',
+					align: 'right',
+					verticalAlign: 'top',
+					x: -10,
+					y: 100,
+					borderWidth: 0
+				},
+				series: [{
+					name: 'Tokyo',
+					data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
+				}, {
+					name: 'New York',
+					data: [-0.2, 0.8, 5.7, 11.3, 17.0, 22.0, 24.8, 24.1, 20.1, 14.1, 8.6, 2.5]
+				}, {
+					name: 'Berlin',
+					data: [-0.9, 0.6, 3.5, 8.4, 13.5, 17.0, 18.6, 17.9, 14.3, 9.0, 3.9, 1.0]
+				}, {
+					name: 'London',
+					data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
+				}]
+			});
+			
+			
+		});
+	</script>
+
+</head>
+<body>
+
+
+
+<div id="demo-header">
+	<h1>Highcharts Demo Gallery</h1>
+	<a href="/">&laquo; Go to the Highcharts home page</a>
+	<p>Pick an example on the left and combine it with a preset theme in the top menu. Click 
+	"View options" to inspect the code.</p>
+</div>
+
+<div id="demo-menu">
+		<h4>Line and scatter charts</h4>
+	<ul>
+				<li><a href="/demo/line-basic">
+			Basic line</a></li>
+				<li><a href="/demo/line-ajax">
+			Ajax loaded data, clickable points</a></li>
+				<li><a href="/demo/line-labels">
+			With data labels</a></li>
+				<li><a href="/demo/line-time-series">
+			Time series, zoomable</a></li>
+				<li><a href="/demo/spline-inverted">
+			Spline with inverted axes</a></li>
+				<li><a href="/demo/spline-symbols">
+			Spline with symbols</a></li>
+				<li><a href="/demo/spline-plot-bands">
+			Spline with plot bands</a></li>
+				<li><a href="/demo/spline-irregular-time">
+			Time data with irregular intervals</a></li>
+				<li><a href="/demo/scatter">
+			Scatter plot</a></li>
+			</ul>
+		<h4>Area charts</h4>
+	<ul>
+				<li><a href="/demo/area-basic">
+			Basic area</a></li>
+				<li><a href="/demo/area-negative">
+			Area with negative values</a></li>
+				<li><a href="/demo/area-stacked">
+			Stacked area</a></li>
+				<li><a href="/demo/area-stacked-percent">
+			Percentage area</a></li>
+				<li><a href="/demo/area-missing">
+			Area with missing points</a></li>
+				<li><a href="/demo/area-inverted">
+			Inverted axes</a></li>
+				<li><a href="/demo/areaspline">
+			Area-spline</a></li>
+			</ul>
+		<h4>Column and bar charts</h4>
+	<ul>
+				<li><a href="/demo/bar-basic">
+			Basic bar</a></li>
+				<li><a href="/demo/bar-stacked">
+			Stacked bar</a></li>
+				<li><a href="/demo/bar-negative-stack">
+			Bar with negative stack</a></li>
+				<li><a href="/demo/column-basic">
+			Basic column</a></li>
+				<li><a href="/demo/column-negative">
+			Column with negative values</a></li>
+				<li><a href="/demo/column-stacked">
+			Stacked column</a></li>
+				<li><a href="/demo/column-stacked-and-grouped">
+			Stacked and grouped column</a></li>
+				<li><a href="/demo/column-stacked-percent">
+			Stacked percentage column</a></li>
+				<li><a href="/demo/column-rotated-labels">
+			Column with rotated labels</a></li>
+				<li><a href="/demo/column-drilldown">
+			Column with drilldown</a></li>
+				<li><a href="/demo/column-parsed">
+			Data defined in a HTML table</a></li>
+			</ul>
+		<h4>Pie charts</h4>
+	<ul>
+				<li><a href="/demo/pie-basic">
+			Pie chart</a></li>
+				<li><a href="/demo/pie-donut">
+			Donut chart</a></li>
+				<li><a href="/demo/pie-legend">
+			Pie with legend</a></li>
+			</ul>
+		<h4>Dynamic charts</h4>
+	<ul>
+				<li><a href="/demo/dynamic-update">
+			Spline updating each second</a></li>
+				<li><a href="/demo/dynamic-click-to-add">
+			Click to add a point</a></li>
+				<li><a href="/demo/dynamic-master-detail">
+			Master-detail chart</a></li>
+			</ul>
+		<h4>Combinations</h4>
+	<ul>
+				<li><a href="/demo/combo">
+			Column, line and pie</a></li>
+				<li><a href="/demo/combo-dual-axes">
+			Dual axes, line and column</a></li>
+				<li><a href="/demo/combo-multi-axes">
+			Multiple axes</a></li>
+				<li><a href="/demo/combo-regression">
+			Scatter with regression line</a></li>
+			</ul>
+	</div>
+
+<div id="demo-content">
+	
+	<div id="styleswitcher">
+		<ul>
+			<li><a href="/demo/line-basic">Default</a></li>
+			<li><a href="/demo/line-basic/grid">Grid</a></li>
+			<li><a href="/demo/line-basic/skies">Skies</a></li>
+			<li><a href="/demo/line-basic/gray">Gray</a></li>
+			<li><a href="/demo/line-basic/dark-blue">Dark blue</a></li>
+			<li><a href="/demo/line-basic/dark-green">Dark green</a></li>
+		</ul>
+	</div>
+	<br/>
+	<br/>
+	<br/>
+	<div id="container" class="highcharts-container" style="height:410px; margin: 0 2em; clear:both; min-width: 600px">
+	</div>
+
+	<div style="margin: 1em">
+	
+			
+		<div class="buttons">
+			<a href="javascript:" 
+				onclick="hs.htmlExpand(this, { width: 800,
+					headingText: 'Highcharts Configuration Preview', 
+					wrapperClassName: 'draggable-header' })">
+				View options</a>
+			<div class="highslide-maincontent">
+				<pre>
+var chart;
+$(document).ready(function() {
+   chart = new Highcharts.Chart({
+      chart: {
+         renderTo: 'container',
+         defaultSeriesType: 'line',
+         marginRight: 130,
+         marginBottom: 25
+      },
+      title: {
+         text: 'Monthly Average Temperature',
+         x: -20 //center
+      },
+      subtitle: {
+         text: 'Source: WorldClimate.com',
+         x: -20
+      },
+      xAxis: {
+         categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 
+            'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+      },
+      yAxis: {
+         title: {
+            text: 'Temperature (&Acirc;&deg;C)'
+         },
+         plotLines: [{
+            value: 0,
+            width: 1,
+            color: '#808080'
+         }]
+      },
+      tooltip: {
+         formatter: function() {
+                   return '&lt;b&gt;'+ this.series.name +'&lt;/b&gt;&lt;br/&gt;'+
+               this.x +': '+ this.y +'&Acirc;&deg;C';
+         }
+      },
+      legend: {
+         layout: 'vertical',
+         align: 'right',
+         verticalAlign: 'top',
+         x: -10,
+         y: 100,
+         borderWidth: 0
+      },
+      series: [{
+         name: 'Tokyo',
+         data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
+      }, {
+         name: 'New York',
+         data: [-0.2, 0.8, 5.7, 11.3, 17.0, 22.0, 24.8, 24.1, 20.1, 14.1, 8.6, 2.5]
+      }, {
+         name: 'Berlin',
+         data: [-0.9, 0.6, 3.5, 8.4, 13.5, 17.0, 18.6, 17.9, 14.3, 9.0, 3.9, 1.0]
+      }, {
+         name: 'London',
+         data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
+      }]
+   });
+   
+   
+});
+   </pre>
+			</div>
+			
+						
+						<a>&laquo; Previous</a>
+						
+						<a id="next-example"  title="Next (arrow right)"
+				href="/demo/line-ajax">Next &raquo;</a>
+					</div>
+		
+		
+	</div>
+	
+
+</div>
+
+
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-2995052-3");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+</body>
+
+</html>

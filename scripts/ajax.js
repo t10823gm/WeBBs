@@ -130,13 +130,13 @@ function result_graph_success(response) {
 		    icon:'./img/icon/icons/rss.png',
 		    id: 'DL_EM',
 		    handler: function() {
-			window.location.href='http://10.1.4.84/webbs/cgi/downloader_em.cgi?model='+model_name.model;
+			window.location.href='http://webbs.sfc.keio.ac.jp/webbs/cgi/downloader_em.cgi?model='+model_name.model;
 		    }
 		},{
 		    icon:'./img/icon/icons/bullet_disk.png',
 		    id: 'DL_result',
                     handler: function() {
-			window.location.href='http://10.1.4.84/webbs/cgi/downloader_result.cgi?session_ID='+session_ID;
+			window.location.href='http://webbs.sfc.keio.ac.jp/webbs/cgi/downloader_result.cgi?session_ID='+session_ID;
 		    }
 		},{
 		    icon:'./img/icon/icons/application_cascade.png',
