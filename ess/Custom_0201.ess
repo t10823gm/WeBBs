@@ -1,0 +1,65 @@
+import sys
+import os
+import re
+import ecell
+from ecell.ECDDataFile import *
+
+sys.path.insert( 0, PYTHON_PATH )
+theSimulator.setDMSearchPath( DM_PATH + ':' + theSimulator.getDMSearchPath() )
+#ecell.ecs.setDMSearchPath( DM_PATH + ':' + ecell.ecs.getDMSearchPath() )
+#import entityextractor
+#from entityextractor import *
+
+
+loadModel( MODEL_FILE )
+
+for key in LIST:
+	entry = key.split(';')
+	aEntityPathList = entry[0].split( ':' )
+	aEntityPN = aEntityPathList[0] + ':' +aEntityPathList[1] + ':' + aEntityPathList[2]
+	
+	
+	if not aEntityPathList[3]:
+    		if aEntityPathList[0] == 'Variable':
+        		aPropertyName = 'Value'
+	   	elif aEntityPathList[0] == 'Process':
+        		aPropertyName = 'Activity'
+	else:
+    		aPropertyName = aEntityPathList[3]
+	
+	aTargetStub = createEntityStub( aEntityPN )
+	aTargetStub[ aPropertyName ] = float(entry[1])
+	
+'''
+make List of System, Variable, Process
+'''
+theLoggerDict = {}
+for aLoggedFullPN in LOGGING:
+    theLoggerDict[ aLoggedFullPN ] = createLoggerStub( aLoggedFullPN )
+    theLoggerDict[ aLoggedFullPN ].create()
+#    theLoggerDict[ aLoggedFullPN ].setLoggerPolicy([0,INTERVAL,1,0])
+    theLoggerDict[ aLoggedFullPN ].setLoggerPolicy([0,INTERVAL,1,1024*1000])
+#    theLoggerDict[ aLoggedFullPN ].setMinimumInterval( INTERVAL )
+
+#ducky_130201
+
+INCREMENT = END_TIME / 10.0
+
+for i in range(10):
+    run(INCREMENT)
+    saveModel( DATA_DIRECTORY + '/EndStatus_' + str(i) + '.eml' )
+
+#run( END_TIME )
+saveModel( DATA_DIRECTORY + '/EndStatus.eml' )
+
+message( 'Stopped at %f "m"seconds.' % getCurrentTime() )
+
+p = re.compile( '(/|:)' )
+
+for aLoggedFullPN in LOGGING:
+#    theDataFile = ecell.ECDDataFile( theLoggerDict[ aLoggedFullPN ].getData( START_TIME, END_TIME, INTERVAL) )
+    theDataFile = ECDDataFile( theLoggerDict[ aLoggedFullPN ].getData( START_TIME, END_TIME, INTERVAL) )
+    theDataFile.setDataName( theLoggerDict[ aLoggedFullPN ].getName() )
+    theDataFile.save( DATA_DIRECTORY + '/' + p.sub( '_', aLoggedFullPN ) )
+
+

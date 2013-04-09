@@ -1,0 +1,70 @@
+import sys
+import os
+import re
+import ecell
+sys.path.insert( 0, PYTHON_PATH )
+ecell.ecs.setDMSearchPath( DM_PATH + ':' + ecell.ecs.getDMSearchPath() )
+import entityextractor
+from entityextractor import *
+
+loadModel( MODEL_FILE )
+
+for key in LIST:
+	entry = key.split(';')
+	aEntityPathList = entry[0].split( ':' )
+	aEntityPN = aEntityPathList[0] + ':' +aEntityPathList[1] + ':' + aEntityPathList[2]
+	
+	if not aEntityPathList[3]:
+    		if aEntityPathList[0] == 'Variable':
+        		aPropertyName = 'Value'
+	   	elif aEntityPathList[0] == 'Process':
+        		aPropertyName = 'Activity'
+	else:
+    		aPropertyName = aEntityPathList[3]
+
+	aTargetStub = createEntityStub( aEntityPN )
+	aTargetStub[ aPropertyName ] = float(entry[1])
+
+'''
+make List of System, Variable, Process
+'''
+
+theSystemList       = getSystemList( self )
+theProcessList      = getProcessList( self, theSystemList )
+
+if LOGGER_MODE == 'V':
+    theVariableList     = getVariableList( self, theSystemList )
+    theLoggedFullPNList = getLoggedFullPNList( self, theVariableList )
+    
+elif LOGGER_MODE == 'P':
+    theProcessList       = getProcessList( self, theSystemList )
+    theLoggedFullPNList  = getLoggedFullPNList( self, theProcessList )
+    
+elif LOGGER_MODE == 'A':
+    theVariableList     = getVariableList( self, theSystemList )
+    theProcessList       = getProcessList( self, theSystemList )
+    theLoggedFullPNList = getLoggedFullPNList( self, ( theVariableList + theProcessList ) )
+
+theLoggerDict = {}
+for aLoggedFullPN in theLoggedFullPNList:
+    theLoggerDict[ aLoggedFullPN ] = createLoggerStub( aLoggedFullPN )
+    theLoggerDict[ aLoggedFullPN ].create()
+    theLoggerDict[ aLoggedFullPN ].setMinimumInterval( INTERVAL )
+
+run( END_TIME )
+saveModel( DATA_DIRECTORY + '/EndStatus.eml' )
+message( 'Stopped at %f "m"seconds.' % getCurrentTime() )
+
+p = re.compile( '(/|:)' )
+
+
+for aLoggedFullPN in theLoggedFullPNList:
+    theDataFile = ecell.ECDDataFile( theLoggerDict[ aLoggedFullPN ].getData( START_TIME_D, END_TIME, INTERVAL) )
+    theDataFile.setDataName( theLoggerDict[ aLoggedFullPN ].getName() )
+    theDataFile.save( DATA_DIRECTORY + '/' + p.sub( '_', aLoggedFullPN ) )
+
+for aLoggedFullPN in LOGGING:
+    theDataFile = ecell.ECDDataFile( theLoggerDict[ aLoggedFullPN ].getData( START_TIME, END_TIME, INTERVAL) )
+    theDataFile.setDataName( theLoggerDict[ aLoggedFullPN ].getName() )
+    theDataFile.save( DATA_DIRECTORY + '/' + p.sub( '_', aLoggedFullPN ) + 'long')    
+
