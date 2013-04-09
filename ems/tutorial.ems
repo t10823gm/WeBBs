@@ -7,15 +7,15 @@ EXPERIMENT_NAME  = 'test_0216'
 #START_TIME       = 900.0e+3
 START_TIME       = 0
 #END_TIME         = 1.0e+3
-END_TIME         = 40.0
+END_TIME         = 100.0
 INTERVAL         = 1
 
 aEmlMode = 'S'
-EML_PATH  = 'simple_dm.eml'
-PYTHON_PATH = '/var/www/ems/'
+EML_PATH  = 'simple.eml'
+PYTHON_PATH = '/var/www/gem/ems/'
 
 aLogMode = 'C'
-aLogList = '/var/www/ems/logger.txt'
+aLogList = '/var/www/gem/ems/logger.txt'
 #specify if aLogMode == 'D'
 START_TIME_D = 0.9e+3
 
@@ -34,8 +34,8 @@ Y_END              = 101
 Y_INCREMENT        = 100
 Y_COEFFICIENT      = 1e-2
 
-DM_PATH          = '/var/www/ems/cpp'
-DATA_DIRECTORY   = '/var/www/ems/data'
+DM_PATH          = '/var/www/gem/ems/cpp'
+DATA_DIRECTORY   = '/var/www/gem/ems/data'
 
 ESS_PATH = '/var/www/ess'
 

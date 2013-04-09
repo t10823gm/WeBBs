@@ -26,14 +26,12 @@ print
 # Show error as a page description.                                                                        
 sys.stderr = sys.stdout
 
-
 # Get and parse a query string                                                                             
 query_string_key = 'QUERY_STRING'
 if query_string_key in os.environ:
     query = cgi.parse_qs(os.environ[query_string_key])
 else:
     query = {}
-
 
 # Get and escape a MESSAGE                                                                                 
 ID_key = 'session_ID'
@@ -45,7 +43,6 @@ else:
 
 ###########
 
-#anEMLFileName = "./results/" + ID + "/" + ID + ".eml"        
 anEMLFileName = "../results/guest/" + ID + "/" + ID + ".eml"
 runtime = 100
 
@@ -74,7 +71,9 @@ for id in VariableList:
 
 ## run  ##
 
-aSession.run(runtime)
+#aSession.run(runtime)
+os.system('ecell3-session-manager -e ../ems/tutorial.ems')
+
 
 ## save data ##
 
