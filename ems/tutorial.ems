@@ -1,0 +1,245 @@
+import re
+import os
+setTmpDirRemovable(False)
+
+EXPERIMENT_NAME  = 'test_0216'
+
+#START_TIME       = 900.0e+3
+START_TIME       = 0
+#END_TIME         = 1.0e+3
+END_TIME         = 40.0
+INTERVAL         = 1
+
+aEmlMode = 'S'
+EML_PATH  = 'simple_dm.eml'
+PYTHON_PATH = '/var/www/ems/'
+
+aLogMode = 'C'
+aLogList = '/var/www/ems/logger.txt'
+#specify if aLogMode == 'D'
+START_TIME_D = 0.9e+3
+
+aSimulationMode = 'F'
+aPerturb = 'Variable:/CELL/MEMBRANE/INaK:Couabain:MolarConc'
+
+X_START            = 0
+X_END              = 101
+#X_START            = 1500
+#X_END              = 1501
+X_INCREMENT        = 20
+X_COEFFICIENT      = 1e-9
+### if aSimulationMode == '2D':
+Y_START            = 0
+Y_END              = 101
+Y_INCREMENT        = 100
+Y_COEFFICIENT      = 1e-2
+
+DM_PATH          = '/var/www/ems/cpp'
+DATA_DIRECTORY   = '/var/www/ems/data'
+
+ESS_PATH = '/var/www/ess'
+
+aLoggerModeList = ['V']
+
+### LOG MODE
+
+if aLogMode == 'A':
+	print "AUTOMATIC"
+	ESS_FILE = ESS_PATH + '/Automatic_yucca.ess'
+elif aLogMode == 'C':
+	print aLogList
+	ESS_FILE = ESS_PATH + '/Custom_yucca.ess'
+elif aLogMode == 'D':
+	print aLogList
+	ESS_FILE = ESS_PATH + '/Dual_yucca.ess'
+elif aLogMode == 'N':
+	print aLogList
+	ESS_FILE = ESS_PATH + '/new.ess'
+
+
+### SIMUATION MODE 
+keylist = []
+lib = {}	
+SR = {}
+Volume = {}
+EmlList = []
+
+if aEmlMode == 'M':
+	f4 = open(EML_PATH)
+	line4 = f4.readline()
+
+	while line4:
+		splitted = line4.split('\n')
+		EmlList.append(splitted[0])
+		line4 = f4.readline()
+	f4.close()
+elif aEmlMode == 'S':
+	EmlList.append(EML_PATH)
+
+if aSimulationMode == 'S' or aSimulationMode == 'M':
+	Y_START            = 100
+	Y_END              = 101
+	Y_INCREMENT        = 10
+	Y_COEFFICIENT      = 1e-2
+elif aSimulationMode == 'F':
+	aPerturb = 'Variable:/:SIZE:Value'
+	
+	X_START            = 100
+	X_END              = 101
+	X_INCREMENT        = 1
+	X_COEFFICIENT      = 1e-2
+
+	Y_START            = 100
+	Y_END              = 101
+	Y_INCREMENT        = 10
+	Y_COEFFICIENT      = 1e-2
+
+if aSimulationMode == 'S' or aSimulationMode == 'F':
+	name = aPerturb
+	keylist.append(name)
+	lib["PE_" + name]  = name
+
+	lib["XY_" + name ] = 'X'
+		
+	lib["MIN_" + name] = 0
+	lib["DIFF_" + name] = 1.0
+	
+else:
+	f = open(aPerturb)
+	line = f.readline()
+
+	while line:
+		splitted = line.split(',')
+
+		name = splitted[0]
+		keylist.append(name)
+		lib["PE_" + name]  = name
+
+		if splitted[3] == "\n" or not splitted[3]: 
+			lib["XY_" + name ] = 'X'
+		elif aSimulationMode == 'M':
+			lib["XY_" + name ] = 'X'
+		else:
+			lib["XY_" + name ] = splitted[3]
+	
+		split_again = re.split(r'\+|\-',str(splitted[1]))
+		flag = re.search(r'e',str(split_again[0]))
+		
+		if flag:
+			calc = re.split(r'e',str(splitted[1]))
+			min = float(calc[0])* 10 **float(calc[1])
+		
+			calc = re.split(r'e',str(splitted[2]))
+			max = float(calc[0])* 10 **float(calc[1])
+	
+			lib["MIN_" + name] = min
+			lib["DIFF_" + name] = max - min
+		else: 
+			lib["MIN_" + name] = float(splitted[1])
+        		lib["DIFF_" + name] = float(splitted[2]) - float(splitted[1])
+
+		#SR_flag = re.search(r'SRTransfer',str(splitted[0]))
+		#if SR_flag:
+		#	SR["MIN"] = float(splitted[1])		
+		#	SR["DIFF"] = float(splitted[2]) - float(splitted[1])
+
+		#Volume_flag = re.search(r'CYTOPLASM:SIZE',str(splitted[0]))
+		#if Volume_flag:
+		#	Volume["MIN"] = float(splitted[1])		
+		#	Volume["DIFF"] = float(splitted[2]) - float(splitted[1])
+
+#		print lib["PE_" + name]
+#		print lib["DIFF_" + name]
+
+		line = f.readline()
+	f.close()
+
+### SIMUATION MODE 
+list4logger = []
+
+if aLogMode == 'C' or aLogMode == 'D':
+	f2 = open(aLogList)
+	line2 = f2.readline()
+
+	while line2:
+		splitting = line2.split('\n')
+	
+		txt = splitting[0]
+        	list4logger.append(txt)
+		line2 = f2.readline()
+	f2.close()
+
+
+message('SIMULATION MODE...ok')
+
+CURRENT_DIRECTORY = os.getcwd()
+
+DATA_DIRECTORY = DATA_DIRECTORY + '/' + EXPERIMENT_NAME
+
+if os.access( DATA_DIRECTORY, os.F_OK ) == 0 :
+
+    os.makedirs( DATA_DIRECTORY )
+
+aJobIDList = []
+
+for MODEL_FILE in EmlList:
+
+#    	aValue = float(X_START) * X_COEFFICIENT
+    	aDirName = MODEL_FILE.split('.')
+	
+	print aDirName[0]
+#
+	for i in xrange( X_START, X_END, X_INCREMENT ):
+
+	    aValue = float( i ) * X_COEFFICIENT 
+    
+	    for j in xrange( Y_START, Y_END, Y_INCREMENT): 
+		bValue = float( j ) * Y_COEFFICIENT
+
+		if aSimulationMode == '2D':
+			aDataDirectory = DATA_DIRECTORY + '/' + str( i ) + '_' + str( j ) + '_' + str(END_TIME) + '_' + aDirName[0]
+			print aValue,'_',bValue
+		elif aSimulationMode == 'F':
+			aDataDirectory = DATA_DIRECTORY + '/0F_' + aDirName[0] + '_' + str(END_TIME)
+		else:
+			aDataDirectory = DATA_DIRECTORY + '/' + str( i ) + '_' + aSimulationMode + '_' + str(END_TIME) + '_' + aDirName[0]
+			print aValue
+
+		try:
+			os.mkdir( aDataDirectory )
+		except OSError, e:
+			pass
+	
+		for logger_mode in aLoggerModeList:
+       			aParameterDict = {
+            		'CURRENT_DIRECTORY' : CURRENT_DIRECTORY,
+            		'DM_PATH'           : DM_PATH,
+            		'DATA_DIRECTORY'    : aDataDirectory,
+            		'MODEL_FILE'        : PYTHON_PATH + '/' + MODEL_FILE,
+            		'START_TIME'        : START_TIME,
+         		'START_TIME_D'        : START_TIME_D,
+            		'END_TIME'          : END_TIME,
+            		'INTERVAL'          : INTERVAL,
+            		'LOGGER_MODE'       : logger_mode,
+			'PYTHON_PATH'       : PYTHON_PATH,
+            		}
+
+			new_keylist = []
+	
+			for key in keylist:
+				if lib["XY_" + key] == 'Y':
+					XYValue = bValue
+				else:
+					XYValue = aValue
+
+				newValue = lib["MIN_" + key]
+				newValue = newValue + XYValue * lib["DIFF_" + key]
+				new_keylist.append(key + ";" + str(newValue))
+	
+			aParameterDict['LIST'] = new_keylist
+			aParameterDict['LOGGING'] = list4logger
+	
+			aJobID = registerEcellSession( ESS_FILE, aParameterDict, [MODEL_FILE, ESS_PATH + '/entityextractor.py'])
+			aJobIDList.append( aJobID )
+
+run()
