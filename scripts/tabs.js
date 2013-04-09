@@ -17,8 +17,7 @@ var ini_Grid = [
 
 // Definition Columns
 function variable_grid(){
-    //make the cell to edit
-    var cellEditing = Ext.create('Ext.grid.plugin.CellEditing', { clicksToEdit: 1 });
+    var cellEditing = Ext.create('Ext.grid.plugin.CellEditing', { clicksToEdit: 1 });     //make the cell to edit
     var v_sm = Ext.create('Ext.selection.CheckboxModel');     //Checkbox for CreateLogger
     var v_store = Ext.create('Ext.data.ArrayStore', {
 	    fields: [{name: 'v_id'}, {name: 'path'}, {name: 'value', type: 'float'}, {name: 'molarconc', type: 'float'}],
@@ -43,12 +42,10 @@ function variable_grid(){
     v_grid.on('edit', function(editor, e) {
 	    console.log(v_store);
 	    var gridrecord = v_grid.getSelectionModel().getSelection();
-	    //written by Duke
 	    var v_ID = gridrecord[0].data.v_id;
 	    var Path = gridrecord[0].data.path;
 	    var path_ID = Path +"/"+ v_ID;
 	    var set_value = e.value;
-	    console.log(set_value);
 	    
 	    //SetValue_sucsess
 	    function set_value_success(response){
@@ -137,7 +134,6 @@ function process_grid(){
 		}
 	    }
 	});
-    //    process_grid.getStore().loadData(responseJSON);
     return process_grid;    
 };
 

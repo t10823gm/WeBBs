@@ -1,6 +1,6 @@
 Ext.require(['*']);
 
-var session_lib = [];
+var session_lib = []; // connect "session_ID" to "tab name"
 
 var ViewPort;
 Ext.onReady(function(){
@@ -50,7 +50,7 @@ Ext.onReady(function(){
 					border: false,
 					height: '50%',
 					autoscroll: true,
-					html: 'Under Construction<br>Description of Model',
+					html: '<h3>Description of Model</h3>',
 				    },{
 					title: 'Pathway Map',
 					autoscroll: true,
@@ -58,7 +58,7 @@ Ext.onReady(function(){
 					split:true,
 					border: false,
 					height: '50%',
-					html: 'Under Construction<br>Show a Picture of Pathwaymap'
+					html: '<h3>Show a Picture of Pathwaymap</h3>'
 				    }]
 			    }]
 		    },{

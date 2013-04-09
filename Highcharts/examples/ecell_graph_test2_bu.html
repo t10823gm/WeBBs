@@ -1,0 +1,118 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Highcharts Example</title>
+		
+		
+		<!-- 1. Add these JavaScript inclusions in the head of your page -->
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+		<script type="text/javascript" src="../js/highcharts.js"></script>
+		
+		<!-- 1a) Optional: add a theme file -->
+		<!--
+			<script type="text/javascript" src="../js/themes/gray.js"></script>
+		-->
+		
+		<!-- 1b) Optional: the exporting module -->
+		<script type="text/javascript" src="../js/modules/exporting.js"></script>
+		
+		
+		<!-- 2. Add the JavaScript to initialize the chart on document ready -->
+		<script type="text/javascript">
+		
+			     var options = {
+					chart: {
+						renderTo: 'container',
+						defaultSeriesType: 'line',
+						zoomType: 'xy'
+						},
+					title: {
+						text: 'YAMAKUBO',
+						x: -20 //center
+					},
+					xAxis: {
+						title: {
+							text: 'Time'
+						},
+						//categories: [],
+						plotLines: [{
+							value: 0,
+							width: 1,
+							color: '#000000'
+					    }],
+					    min:0.0
+					},
+					yAxis: {
+						title: {
+							text: 'Value'
+						},
+						plotLines: [{
+							value: 0,
+							width: 2,
+							color: '#000000'
+					    }],
+					
+					},
+					tooltip: {
+					  crosshairs: true,
+					  shared: true
+					//						formatter: function() {
+				       //         return '<b>'+ this.series.name +'</b><br/>'+
+							//	this.x +': '+ this.y +'';
+					//	}
+					},
+					legend: {
+						layout: 'vertical',
+						align: 'right',
+						verticalAlign: 'top',
+						x: -10,
+						y: 100,
+						borderWidth: 0
+					},
+					series: []
+				};
+
+///////////////parse ECDfile(jQuery)///////////////////////
+
+		$.get('./S.ecd', function(data) {;  
+	   	 //Split the lines
+		    var lines = data.split('\n');    //yoko:line
+            var yamakubo = {  data: [] }
+            
+  		  $.each(lines, function(lineNo, line) {
+       		 var items = line.split('\t');     //tate:item
+        	 if (lineNo > 5) {
+               $.each(items, function(itemNo, item) {  
+                  if (itemNo == 0 ) {
+                //	options.xAxis.categories.push(item);
+               	  } else if (itemNo == 1) {
+               	    yamakubo.data.push(parseFloat(item));
+               	  }
+               });
+        	 }
+          });
+        	 options.series.push(yamakubo);
+    // Create the chart
+    var chart = new Highcharts.Chart(options);
+	});
+
+     //   		maryu.name = item;
+       
+////////////////////////////////////////////////////////
+
+			
+				
+		//	});
+				
+		</script>
+		
+	</head>
+	<body>
+		
+		<!-- 3. Add the container -->
+		<div id="container" style="width: 800px; height: 400px; margin: 0 auto"></div>
+		
+				
+	</body>
+</html>

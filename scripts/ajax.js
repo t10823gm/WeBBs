@@ -111,7 +111,7 @@ function getPropertySuccess(response){
 
 function getPropertyFailure(response){
     if (response.responseText !== undefined) {
-        alert("fuck!!");
+        alert("Sorry failed");
     };   
 }
 
@@ -119,24 +119,22 @@ function getPropertyFailure(response){
 //////Ajax Success
 function result_graph_success(response) {
     var model_name = { "model": tabs.getActiveTab().title };
-    var toolbarObject = Ext.create('Ext.toolbar.Toolbar', {
-	    //	    renderTo: '',
+    var toolbarObject = Ext.create('Ext.toolbar.Toolbar', {  // 
 	    //	    renderTo: document.body,
 	    id: 'result_tool_bar',
 	    border: false,
 	    width: '100%',
-	    //	    items: [{
 	    items: ['->',{
 		    icon:'./img/icon/icons/rss.png',
 		    id: 'DL_EM',
 		    handler: function() {
-			window.location.href='http://10.1.4.84/webbs/cgi/downloader_em.cgi?model='+model_name.model;
+			window.location.href='http://webbs.sfc.keio.ac.jp/webbs/cgi/downloader_em.cgi?model='+model_name.model;
 		    }
 		},{
 		    icon:'./img/icon/icons/bullet_disk.png',
 		    id: 'DL_result',
                     handler: function() {
-			window.location.href='http://10.1.4.84/webbs/cgi/downloader_result.cgi?session_ID='+session_ID;
+			window.location.href='http://webbs.sfc.keio.ac.jp/webbs/cgi/downloader_result.cgi?session_ID='+session_ID;
 		    }
 		},{
 		    icon:'./img/icon/icons/application_cascade.png',
@@ -158,7 +156,6 @@ function result_graph_success(response) {
     var tip1 = Ext.create('Ext.tip.ToolTip', { target: "DL_EM", html: "Download EM Model" });
     var tip2 = Ext.create('Ext.tip.ToolTip', { target: "DL_result", html: "Download Result Data" });
     var tip3 = Ext.create('Ext.tip.ToolTip', { target: "separateGraph", html: "Devide Graph" });
-
 
     if (response.responseText !== undefined) {
 	var resultJSON = JSON.parse(response.responseText);

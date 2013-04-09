@@ -23,10 +23,10 @@ name = str( int(time.time() % 1296000) * 10 + int(random.random()) + 1048576 )
 os.mkdir("../results/guest/" + name)
 os.system("chmod 777 ../results/guest/" + name)
 os.system("cp ../models/" + ID + " ../results/guest/" + name + "/" + name + ".em")
-os.system("cp /var/www/ems/merge_ecd_msec.pl ../results/guest/"+ name + "/")
+#os.system("cp /var/www/ems/merge_ecd_msec.pl ../results/guest/"+ name + "/")
 
 # convert EM to EML (by em2eml)
-os.system("/usr/local/bin/ecell3-em2eml --outfile=../results/guest/" + name + "/" + name + ".eml ../results/guest/" + name + "/" + name + ".em")
+os.system("/usr/bin/ecell3-em2eml --outfile=../results/guest/" + name + "/" + name + ".eml ../results/guest/" + name + "/" + name + ".em")
 
 # load EML model and list-up all variable (PATH, Value, MolarConc)
 anEMLFileName = "../results/guest/" + name + "/" + name + ".eml"
