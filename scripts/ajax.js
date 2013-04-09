@@ -111,7 +111,7 @@ function getPropertySuccess(response){
 
 function getPropertyFailure(response){
     if (response.responseText !== undefined) {
-        alert("fuck!!");
+        alert("Sorry failed");
     };   
 }
 
@@ -119,13 +119,11 @@ function getPropertyFailure(response){
 //////Ajax Success
 function result_graph_success(response) {
     var model_name = { "model": tabs.getActiveTab().title };
-    var toolbarObject = Ext.create('Ext.toolbar.Toolbar', {
-	    //	    renderTo: '',
+    var toolbarObject = Ext.create('Ext.toolbar.Toolbar', {  // 
 	    //	    renderTo: document.body,
 	    id: 'result_tool_bar',
 	    border: false,
 	    width: '100%',
-	    //	    items: [{
 	    items: ['->',{
 		    icon:'./img/icon/icons/rss.png',
 		    id: 'DL_EM',
@@ -158,7 +156,6 @@ function result_graph_success(response) {
     var tip1 = Ext.create('Ext.tip.ToolTip', { target: "DL_EM", html: "Download EM Model" });
     var tip2 = Ext.create('Ext.tip.ToolTip', { target: "DL_result", html: "Download Result Data" });
     var tip3 = Ext.create('Ext.tip.ToolTip', { target: "separateGraph", html: "Devide Graph" });
-
 
     if (response.responseText !== undefined) {
 	var resultJSON = JSON.parse(response.responseText);
