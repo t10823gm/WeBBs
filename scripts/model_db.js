@@ -1,7 +1,8 @@
 var store = Ext.create('Ext.data.TreeStore',{
 	proxy: {
 	    type: 'ajax',
-	    url: '/webbs/models/tree_model_info.txt'
+//	    url: '/webbs/models/tree_model_info.txt'
+	    url: '/gem/models/tree_model_info.txt'
 	},
 	root: {
 	    text: 'E-Cell Model',
@@ -42,7 +43,8 @@ ecell_model.getSelectionModel().on('selectionchange', function(sm, selectedRecor
         params = { "ID": selectedRecord[0].data.text + ".em" };
         //send Ajax Request
 	Ext.Ajax.request({
-		url: "/webbs/cgi/CreateValueList_gem.cgi",
+//		url: "/webbs/cgi/CreateValueList_gem.cgi",
+		url: "/gem/cgi/CreateValueList_gem.cgi",
                     method: "GET",
                     params: params,
                     success: handleSuccess,
@@ -57,7 +59,8 @@ ecell_model.getSelectionModel().on('selectionchange', function(sm, selectedRecor
         params = { file_name: selectedRecord[0].data.text + ".em" };
         //send Ajax Request                                                                          
         Ext.Ajax.request({
-                url: "/webbs/cgi/annotation_list.cgi",
+//                url: "/webbs/cgi/annotation_list.cgi",
+                url: "/gem/cgi/annotation_list.cgi",
                     method: "GET",
                     params: params,
                     success: annotationSuccess,
@@ -71,7 +74,8 @@ ecell_model.getSelectionModel().on('selectionchange', function(sm, selectedRecor
 	//	console.log(selectedRecord[0].data.model_name);
         //send Ajax Request                                                                          
         Ext.Ajax.request({
-                url: "/webbs/cgi/pathway_map.cgi",
+//                url: "/webbs/cgi/pathway_map.cgi",
+                url: "/gem/cgi/pathway_map.cgi",
                     method: "GET",
                     params: params,
                     success: mapSuccess,

@@ -18,7 +18,8 @@ if ID_key in query:
 else:
     ID =""
 
-BASE_URL = '/var/www/webbs/results/guest/'
+BASE_URL = '/var/www/gem/results/guest/'
+#BASE_URL = '/var/www/webbs/results/guest/'
 DL_URL = BASE_URL + ID
 
 print "Content-type: application/octet-stream"

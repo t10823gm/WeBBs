@@ -71,8 +71,8 @@ for id in VariableList:
 
 ## run  ##
 
-#aSession.run(runtime)
-os.system('ecell3-session-manager -e ../ems/tutorial.ems')
+aSession.run(runtime)
+#os.system('ecell3-session-manager -e ../ems/tutorial.ems')
 
 
 ## save data ##
@@ -101,7 +101,8 @@ list_class = []
 
 
 for file in list:
-    url = '/webbs/results/guest/' + ID +"/" + file
+#    url = '/webbs/results/guest/' + ID +"/" + file
+    url = '/gem/results/guest/' + ID +"/" + file
     list_url.append(url)
 
 for i in range (0,len(list)):                  ## move ECDfile to sessionID directly
@@ -113,5 +114,6 @@ list_class.append(dict)
 
 print json.dumps(list_class, sort_keys=True, indent=4)
 
-os.chdir('/var/www/webbs/results/guest/'+ ID +'/')
+#os.chdir('/var/www/webbs/results/guest/'+ ID +'/')
+os.chdir('/var/www/gem/results/guest/'+ ID +'/')
 os.system("perl merge_ecd_msec.pl result.txt")

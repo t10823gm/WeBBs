@@ -77,7 +77,8 @@ function variable_grid(){
             //SetValue
             var params = { "sessionID":session_ID,"PathID":path_ID,"setValue":set_value};
             Ext.Ajax.request({
-                    url: "/webbs/cgi/SetValue_gem.cgi",
+//                    url: "/webbs/cgi/SetValue_gem.cgi",
+                    url: "/gem/cgi/SetValue_gem.cgi",
                         method: "GET",
                         params: params,
                         success: set_value_success,
@@ -124,7 +125,8 @@ function process_grid(){
 		    
 		    if (records[0]) {
 			Ext.Ajax.request({
-				url: "/webbs/cgi/getEachProcessProperty.cgi",
+//				url: "/webbs/cgi/getEachProcessProperty.cgi",
+				url: "/gem/cgi/getEachProcessProperty.cgi",
 				    method: "GET",
 				    params: params,
 				    success: getPropertySuccess,
@@ -197,7 +199,8 @@ function meta_grid(){
 				    }
 				}
 				Ext.Ajax.request({
-					url: "/webbs/cgi/showGraph.cgi",
+//					url: "/webbs/cgi/showGraph.cgi",
+					url: "/gem/cgi/showGraph.cgi",
 					method: "GET",
 					params: params,
 					success: result_graph_success,

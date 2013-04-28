@@ -128,13 +128,15 @@ function result_graph_success(response) {
 		    icon:'./img/icon/icons/rss.png',
 		    id: 'DL_EM',
 		    handler: function() {
-			window.location.href='http://webbs.sfc.keio.ac.jp/webbs/cgi/downloader_em.cgi?model='+model_name.model;
+//			window.location.href='http://webbs.sfc.keio.ac.jp/webbs/cgi/downloader_em.cgi?model='+model_name.model;
+			window.location.href='http://webbs.sfc.keio.ac.jp/gem/cgi/downloader_em.cgi?model='+model_name.model;
 		    }
 		},{
 		    icon:'./img/icon/icons/bullet_disk.png',
 		    id: 'DL_result',
                     handler: function() {
-			window.location.href='http://webbs.sfc.keio.ac.jp/webbs/cgi/downloader_result.cgi?session_ID='+session_ID;
+//			window.location.href='http://webbs.sfc.keio.ac.jp/webbs/cgi/downloader_result.cgi?session_ID='+session_ID;
+			window.location.href='http://webbs.sfc.keio.ac.jp/gem/cgi/downloader_result.cgi?session_ID='+session_ID;
 		    }
 		},{
 		    icon:'./img/icon/icons/application_cascade.png',
@@ -147,7 +149,8 @@ function result_graph_success(response) {
 			    aECD = resultJSON[0].Data[i].split("_");
 			    f_ext = aECD.pop(); f_var = aECD.pop();			    			    
 			    ecd_name = f_var + "_" +f_ext;
-			    window.open("/webbs/cgi/popup.cgi?s_ID="+s_ID+"&ecd_name="+ecd_name+"&FPN="+FPN, "", "width=620, height=420, location=no");
+//			    window.open("/webbs/cgi/popup.cgi?s_ID="+s_ID+"&ecd_name="+ecd_name+"&FPN="+FPN, "", "width=620, height=420, location=no");
+			    window.open("/gem/cgi/popup.cgi?s_ID="+s_ID+"&ecd_name="+ecd_name+"&FPN="+FPN, "", "width=620, height=420, location=no");
 			}
 			return false;
 		    }		    
