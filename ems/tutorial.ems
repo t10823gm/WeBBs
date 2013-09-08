@@ -1,10 +1,10 @@
 import re
 import os
-#setTmpDirRemovable(False)
+setTmpDirRemovable(False)
 
 EXPERIMENT_NAME  = 'hoge'
 
-START_TIME       = 0
+START_TIME	 = 0
 END_TIME         = 100.0
 INTERVAL         = 1
 

@@ -208,6 +208,7 @@ function meta_grid(){
 					}
 				    }
 				}
+				console.log(params);
 				Ext.Ajax.request({
 //					url: "/webbs/cgi/showGraph.cgi",
 //					url: "/gem/cgi/showGraph.cgi",
