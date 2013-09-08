@@ -4,7 +4,7 @@ use warnings;
 
 use CGI;
 
-my $BASE_URL = '/var/www/ecell/models/';
+my $BASE_URL = '/var/www/webbs/ecell/models/';
 
 my $q= CGI->new();
 

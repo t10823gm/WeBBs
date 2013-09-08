@@ -72,7 +72,7 @@ for id in VariableList:
 ## run  ##
 
 aSession.run(runtime)
-#os.system('ecell3-session-manager -e ../ems/tutorial.ems')
+#os.system('ecell3-session-manager -e /var/www/gem/ems/tutorial.ems')
 
 
 ## save data ##

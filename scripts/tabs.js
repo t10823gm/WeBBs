@@ -186,21 +186,32 @@ function meta_grid(){
 			    scale: 'large',
 			    width: 250,
 			    handler: function() {
+				var logger_path = [];
+				var log_len = tabs.getActiveTab().items.items[0].items.items[0].items.items[0].selModel.getSelection().length;
+				for(i=0; i < log_len; i++){
+				    var id = tabs.getActiveTab().items.items[0].items.items[0].items.items[0].selModel.getSelection()[i].data.v_id;
+				    var part = tabs.getActiveTab().items.items[0].items.items[0].items.items[0].selModel.getSelection()[i].data.path;
+				    var path = part + ":" + id;
+				    logger_path.push(path);
+				}
+				console.log(logger_path);
+
 				var s_ID;
 				t_name = tabs.getActiveTab().title;
 				for(i=0; i < session_lib.length; i++){
 				    if(session_lib.length == 1){
-					var params = { "session_ID": session_ID };
+					var params = { "session_ID": session_ID, "logger_path": logger_path };
 				    }else{
 					if(t_name == session_lib[i].t_name){
 					    s_ID = session_lib[i].s_ID;
-					    var params = { "session_ID": s_ID };
+					    var params = { "session_ID": s_ID, "logger_path": logger_path };
 					}
 				    }
 				}
 				Ext.Ajax.request({
 //					url: "/webbs/cgi/showGraph.cgi",
-					url: "/gem/cgi/showGraph.cgi",
+//					url: "/gem/cgi/showGraph.cgi",
+					url: "/gem/cgi/ems.cgi",
 					method: "GET",
 					params: params,
 					success: result_graph_success,

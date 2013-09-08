@@ -162,6 +162,7 @@ function result_graph_success(response) {
 
     if (response.responseText !== undefined) {
 	var resultJSON = JSON.parse(response.responseText);
+	console.log(resultJSON);
 	var charts = Array();
 	tabs.getActiveTab().items.items[0].add({
 		title: 'Result',

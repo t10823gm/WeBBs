@@ -1,26 +1,23 @@
 import re
 import os
-setTmpDirRemovable(False)
+#setTmpDirRemovable(False)
 
-EXPERIMENT_NAME  = 'test_0216'
+EXPERIMENT_NAME  = 'hoge'
 
-#START_TIME       = 900.0e+3
 START_TIME       = 0
-#END_TIME         = 1.0e+3
 END_TIME         = 100.0
 INTERVAL         = 1
 
 aEmlMode = 'S'
-EML_PATH  = 'simple.eml'
-PYTHON_PATH = '/var/www/gem/ems/'
+EML_PATH  = 'Drosophila.eml'
+PYTHON_PATH = '/var/www/gem/ems'
+
+START_TIME_D = 0
 
 aLogMode = 'C'
-aLogList = '/var/www/gem/ems/logger.txt'
-#specify if aLogMode == 'D'
-START_TIME_D = 0.9e+3
+aLogList = '/var/www/gem/ems/logger_d.txt'
 
 aSimulationMode = 'F'
-aPerturb = 'Variable:/CELL/MEMBRANE/INaK:Couabain:MolarConc'
 
 X_START            = 0
 X_END              = 101
@@ -37,23 +34,24 @@ Y_COEFFICIENT      = 1e-2
 DM_PATH          = '/var/www/gem/ems/cpp'
 DATA_DIRECTORY   = '/var/www/gem/ems/data'
 
-ESS_PATH = '/var/www/ess'
+ESS_PATH = '/var/www/gem/ess'
 
 aLoggerModeList = ['V']
 
 ### LOG MODE
 
 if aLogMode == 'A':
-	print "AUTOMATIC"
+#	print "AUTOMATIC"
 	ESS_FILE = ESS_PATH + '/Automatic_yucca.ess'
 elif aLogMode == 'C':
-	print aLogList
+#	print aLogList
+#	ESS_FILE = ESS_PATH + '/Custom_0201.ess'
 	ESS_FILE = ESS_PATH + '/Custom_yucca.ess'
 elif aLogMode == 'D':
-	print aLogList
+#	print aLogList
 	ESS_FILE = ESS_PATH + '/Dual_yucca.ess'
 elif aLogMode == 'N':
-	print aLogList
+#	print aLogList
 	ESS_FILE = ESS_PATH + '/new.ess'
 
 
@@ -170,7 +168,7 @@ if aLogMode == 'C' or aLogMode == 'D':
 	f2.close()
 
 
-message('SIMULATION MODE...ok')
+#message('SIMULATION MODE...ok')
 
 CURRENT_DIRECTORY = os.getcwd()
 
@@ -187,7 +185,7 @@ for MODEL_FILE in EmlList:
 #    	aValue = float(X_START) * X_COEFFICIENT
     	aDirName = MODEL_FILE.split('.')
 	
-	print aDirName[0]
+#	print aDirName[0]
 #
 	for i in xrange( X_START, X_END, X_INCREMENT ):
 
@@ -198,12 +196,12 @@ for MODEL_FILE in EmlList:
 
 		if aSimulationMode == '2D':
 			aDataDirectory = DATA_DIRECTORY + '/' + str( i ) + '_' + str( j ) + '_' + str(END_TIME) + '_' + aDirName[0]
-			print aValue,'_',bValue
+#			print aValue,'_',bValue
 		elif aSimulationMode == 'F':
 			aDataDirectory = DATA_DIRECTORY + '/0F_' + aDirName[0] + '_' + str(END_TIME)
 		else:
 			aDataDirectory = DATA_DIRECTORY + '/' + str( i ) + '_' + aSimulationMode + '_' + str(END_TIME) + '_' + aDirName[0]
-			print aValue
+#			print aValue
 
 		try:
 			os.mkdir( aDataDirectory )
