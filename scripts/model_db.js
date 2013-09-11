@@ -38,7 +38,7 @@ var count = 0;
 var model_name = ''
 ecell_model.getSelectionModel().on('selectionchange', function(sm, selectedRecord) {
 	//ecell_model.getSelectionModel().on('selectionchange', function(sm, selectedRecord) {
-	console.log(selectedRecord);
+//	console.log(selectedRecord);
 	//        params = { "ID": selectedRecord[0].data.model_name + ".em" };
         params = { "ID": selectedRecord[0].data.text + ".em" };
         //send Ajax Request

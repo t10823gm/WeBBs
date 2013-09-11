@@ -1,4 +1,3 @@
-
 // initial Grids
 var ini_Grid = [
 		[' ', , , ,' '],[' ', , , ,' '],[' ', , , ,' '],
@@ -40,7 +39,7 @@ function variable_grid(){
 	});
     //change Value or MolarConc
     v_grid.on('edit', function(editor, e) {
-	    console.log(v_store);
+	//console.log(v_store);
 	    var gridrecord = v_grid.getSelectionModel().getSelection();
 	    var v_ID = gridrecord[0].data.v_id;
 	    var Path = gridrecord[0].data.path;
@@ -117,7 +116,7 @@ function process_grid(){
 		listeners:{
 		selectionchange: function(model, records) {
 		    var gridrecord = this.getSelectionModel().getSelection();
-		    console.log(gridrecord[0].data.p_path);
+//		    console.log(gridrecord[0].data.p_path);
 		    var PATH = gridrecord[0].data.p_path + ":" + gridrecord[0].data.p_id;
 		    
 		    params.PATH = PATH;
@@ -194,7 +193,7 @@ function meta_grid(){
 				    var path = part + ":" + id;
 				    logger_path.push(path);
 				}
-				console.log(logger_path);
+//				console.log(logger_path);
 
 				var s_ID;
 				t_name = tabs.getActiveTab().title;

@@ -41,6 +41,7 @@ function show_graph(Data, Title){
 		    x: -20 
 		},
 		xAxis: {
+		    type:'seconds',
 		    title: {
 			text: 'Time'
 		    },

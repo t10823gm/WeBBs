@@ -161,6 +161,7 @@ function result_graph_success(response) {
     var tip3 = Ext.create('Ext.tip.ToolTip', { target: "separateGraph", html: "Devide Graph" });
 
     if (response.responseText !== undefined) {
+//	console.log(response.responseText);
 	var resultJSON = JSON.parse(response.responseText);
 	console.log(resultJSON);
 	var charts = Array();

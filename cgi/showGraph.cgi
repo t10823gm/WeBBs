@@ -94,7 +94,7 @@ sys.stdout = original_stdout
 # Show MESSAGE                                                                                            
 
 url = ""
-
+print os.getcwd()
 list = os.listdir('./Data')
 list_url = []
 list_class = []
@@ -105,13 +105,15 @@ for file in list:
     url = '/gem/results/guest/' + ID +"/" + file
     list_url.append(url)
 
+print list_url
+
 for i in range (0,len(list)):                  ## move ECDfile to sessionID directly
     shutil.move("./Data/" + list[i],"./")
 shutil.rmtree("./Data")                        ##remove "Data" directly
 
 dict = { "Title":"","Data":list_url}
 list_class.append(dict)
-
+print os.getcwd()
 print json.dumps(list_class, sort_keys=True, indent=4)
 
 #os.chdir('/var/www/webbs/results/guest/'+ ID +'/')
