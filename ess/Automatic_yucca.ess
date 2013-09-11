@@ -9,7 +9,7 @@ theSimulator.setDMSearchPath( DM_PATH + ':' + theSimulator.getDMSearchPath() )
 #ecell.ecs.setDMSearchPath( DM_PATH + ':' + ecell.ecs.getDMSearchPath() )
 #import entityextractor
 
-#from entityextractor import *
+from entityextractor import *
 
 loadModel( MODEL_FILE )
 
@@ -33,6 +33,12 @@ for key in LIST:
 '''
 make List of System, Variable, Process
 '''
+
+# import ecell.analysis.emlsupport as emlsupport
+# sup = emlsupport.EmlSupport( MODEL_FILE )
+# print sup.getSystemList()
+# print sup.getVariableList()
+# print sup.getProcessList()
 
 theSystemList       = getSystemList( self )
 theProcessList      = getProcessList( self, theSystemList )
