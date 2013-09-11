@@ -77,3 +77,28 @@ print json.dumps(list_class, sort_keys=True, indent=4)
 #os.chdir('/var/www/gem/results/guest/'+ ID +'/')
 #os.system("perl merge_ecd_msec.pl result.txt")
 
+
+
+
+
+
+#time.cgi
+
+a = open('/home/yuichiro/tmp.ems','r')
+b = a.readline()
+k =  "START_TIME ="
+h =  "END_TIME ="
+
+while  b:
+        b = a.readline()
+        if k in b :
+                  startbunkatu = b.split(' ')
+                  c = startbunkatu[2];
+                  print c
+
+        else:
+             if h in b :
+                       endbunkatu = b.split(' ')
+                       d = endbunkatu[2]
+                       print d
+a.close()
