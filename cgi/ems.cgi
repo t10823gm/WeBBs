@@ -15,8 +15,7 @@ print
 #################
 
 ### Show error as a page description.                
-sys.stderr = sys.stdout
-
+#sys.stderr = sys.stdout
 
 ### Get and parse a query string     
 query_string_key = 'QUERY_STRING'
@@ -34,7 +33,6 @@ if ID_key in query:
 else:
     ID = "1446806"
 
-
 ### File handling
 rf = open("../ems/tutorial2.ems")            # Read ems file of each session 
 wf = open("../ems/tmp.ems", "w")             # Temporary file
@@ -51,10 +49,9 @@ for line in rf:
     else:
         wf.write(line)
 
-#os.system('ecell3-session-manager -e ../ems/tutorial2.ems &')
+os.system('ecell3-session-manager -e ../ems/tutorial2.ems &')
 wf.close()
 os.system('ecell3-session-manager -e ../ems/tmp.ems')
-
 
 ### Settle ECD files by JSON format
 os.chdir("../results/guest/"+ ID +"/")

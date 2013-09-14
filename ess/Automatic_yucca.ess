@@ -5,6 +5,7 @@ import ecell
 from ecell.ECDDataFile import *
 
 sys.path.insert( 0, PYTHON_PATH )
+
 theSimulator.setDMSearchPath( DM_PATH + ':' + theSimulator.getDMSearchPath() )
 #ecell.ecs.setDMSearchPath( DM_PATH + ':' + ecell.ecs.getDMSearchPath() )
 #import entityextractor
@@ -34,12 +35,6 @@ for key in LIST:
 make List of System, Variable, Process
 '''
 
-# import ecell.analysis.emlsupport as emlsupport
-# sup = emlsupport.EmlSupport( MODEL_FILE )
-# print sup.getSystemList()
-# print sup.getVariableList()
-# print sup.getProcessList()
-
 theSystemList       = getSystemList( self )
 theProcessList      = getProcessList( self, theSystemList )
 
@@ -61,7 +56,7 @@ for aLoggedFullPN in theLoggedFullPNList:
     theLoggerDict[ aLoggedFullPN ] = createLoggerStub( aLoggedFullPN )
     theLoggerDict[ aLoggedFullPN ].create()
 #    theLoggerDict[ aLoggedFullPN ].setLoggerPolicy([0,INTERVAL,1,0])
-    theLoggerDict[ aLoggedFullPN ].setLoggerPolicy([0,INTERVAL,1,1024*1000])
+#    theLoggerDict[ aLoggedFullPN ].setLoggerPolicy([0,INTERVAL,1,1024*1000])
 #    theLoggerDict[ aLoggedFullPN ].setMinimumInterval( INTERVAL )
 
 run( END_TIME )
@@ -72,6 +67,7 @@ p = re.compile( '(/|:)' )
 
 for aLoggedFullPN in theLoggedFullPNList:
 #    theDataFile = ecell.ECDDataFile( theLoggerDict[ aLoggedFullPN ].getData( START_TIME, END_TIME, INTERVAL) )
-    theDataFile = ECDDataFile( theLoggerDict[ aLoggedFullPN ].getData( START_TIME, END_TIME, INTERVAL) )
+#    theDataFile = ECDDataFile( theLoggerDict[ aLoggedFullPN ].getData( START_TIME, END_TIME, INTERVAL) )
+    theDataFile = ECDDataFile( theLoggerDict[ aLoggedFullPN ].getData( START_TIME, END_TIME) )
     theDataFile.setDataName( theLoggerDict[ aLoggedFullPN ].getName() )
     theDataFile.save( DATA_DIRECTORY + '/' + p.sub( '_', aLoggedFullPN ) )
